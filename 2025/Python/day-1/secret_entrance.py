@@ -7,22 +7,16 @@ NUTRAL_NUMBER = 0
 
 def walk_left(point, steps):
     moved = point - steps
-    if moved == NUTRAL_NUMBER:
-        return (NUTRAL_NUMBER, 0)
-    elif moved > L_BOUNDARIES:
-        return (moved, 0)
-    else:
-        return (moved + TOTAL_STEPS, 1)
+    if (moved % 100) == 0:
+        return (NUTRAL_NUMBER, 1)
+    return (moved % TOTAL_STEPS, 0)
 
 
 def walk_right(point, steps):
     moved = point + steps
-    if moved == NUTRAL_NUMBER:
-        return (NUTRAL_NUMBER, 0)
-    elif moved <= R_BOUNDARIES:
-        return (moved, 0)
-    else:
-        return (moved - TOTAL_STEPS, 0)
+    if (moved % 100) == 0:
+        return (0, 1)
+    return (moved % TOTAL_STEPS, 0)
 
 
 def find_password(str_list, start_point):
@@ -40,18 +34,3 @@ def find_password(str_list, start_point):
         else:
             raise ValueError(f"Invalid direction found: {str_}")
     return password
-
-
-# def main(puzzel_input_file):
-#     try:
-#         with open(puzzel_input_file, "r") as f:
-#             str_list = [line.strip() for line in f.readlines()]
-#     except FileNotFoundError:
-#         print(f"File {puzzel_input_file} not found.")
-#         return
-#     print(
-#         "### find_password(str_list=str_list, start_point=50)",
-#         find_password(str_list=str_list, start_point=50),
-#     )
-
-#     return find_password(str_list=str_list, start_point=50)
