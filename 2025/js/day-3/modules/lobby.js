@@ -10,7 +10,7 @@ export function lobbyPart1(banks) {
     if (bank == '') {
       continue;
     }
-    //   Convert to int
+    //  Convert to int
     const joltArr = bank.split('').map((x) => x * 1);
 
     let tenthDigit = joltArr.at(0);
@@ -33,4 +33,18 @@ export function lobbyPart1(banks) {
     joltSum = joltSum + tenthDigit * 10 + onesDigit;
   }
   return joltSum;
+}
+
+export function lobbyPart2(banks) {
+  let bankList = banks.split('\n').map((x) => x.trim());
+  const bankListWithTurnBeterries = Array();
+  for (let l = 0; l < bankList.length; l++) {
+    let bank = bankList.at(l);
+    if (bank === '') {
+      continue;
+    }
+    const joltArr = bank.split('').map((x) => x * 1);
+    const joltArrSort = Array.from(joltArr).sort((a, b) => a - b);
+    console.log(` #### : ${joltArrSort}`);
+  }
 }

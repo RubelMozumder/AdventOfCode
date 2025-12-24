@@ -1,4 +1,4 @@
-import { print_hello, lobbyPart1 } from './modules/lobby.js';
+import { print_hello, lobbyPart1, lobbyPart2 } from './modules/lobby.js';
 
 function main() {
   const exampleBanks = `987654321111111
@@ -210,8 +210,9 @@ function main() {
   print_hello();
   let answPuzzleExample = lobbyPart1(exampleBanks);
   console.log(`Result from example data : ${answPuzzleExample}`); //  357
+  lobbyPart2(exampleBanks);
   let answPuzzleInput = lobbyPart1(inputBanks);
-  console.log(`Result from Input Puzzle data : ${answPuzzleInput}`); //  17074
+  console.log(`Result from Input Puzzle data : ${answPuzzleInput}`); //  17085
 }
 
 main();
