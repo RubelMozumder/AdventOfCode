@@ -1,4 +1,4 @@
-import { print_hello, lobbyPart1, lobbyPart2 } from './modules/lobby.js';
+import { lobbyPart1, lobbyPart2 } from './modules/lobby.js';
 
 function main() {
   const exampleBanks = `987654321111111
@@ -6,6 +6,7 @@ function main() {
 234234234234278
 818181911112111
 `;
+
   const inputBanks = `5353323523322232362334333433323333353233331313222372133133353643423323233323333534414523333432223242
 6344544745655555456556556566665564538465555575558846455665837545764555554465564547547565544657585435
 2246273372253242254243532252231242225522622633532222322234255122531222423531343223123232234213323424
@@ -207,19 +208,21 @@ function main() {
 2643333454446544444383351341444444334563426425284333334754387444446452653732344644843444322238363334
 2112212224221323212122212232121422221211292212942125222122223422322222422223522212222211332222222272
 `;
-  print_hello();
-  // let answPuzzleExample = lobbyPart1(exampleBanks);
-  // let answPuzzleInput = lobbyPart1(inputBanks);
+  let answPuzzleExample = lobbyPart1(exampleBanks);
+  let answPuzzleInput = lobbyPart1(inputBanks);
 
-  // let answPuzzleExample1 = lobbyPart2(exampleBanks, 2);
-
-  // let answPuzzleInput1 = lobbyPart2(inputBanks, 2);
+  console.log(' ##### answPuzzleExample : ', answPuzzleExample);
+  console.log(' ##### answPuzzleInput : ', answPuzzleInput);
 
   let answPuzzleExample2 = lobbyPart2(exampleBanks, 12);
-  console.log('### : ', answPuzzleExample2); // 357
+  console.log('### : ', answPuzzleExample2); // 3121910778619
 
-  // let answPuzzleInput2 = lobbyPart2(inputBanks, 12);
-  // console.log(`Result from Input Puzzle data : ${answPuzzleInput2}`); //  17085
+  let startTime = new Date().getTime();
+  let answPuzzleInput2 = lobbyPart2(inputBanks, 12);
+  let endTime = new Date().getTime();
+  console.log('Time to execute : ', (endTime - startTime) / 1000);
+  console.log(`Result from Input Puzzle data : ${answPuzzleInput2}`); //  169408143086082
+  // Note that lobbzPart2 is also works for second part just need, value to maxLength 2 from 12
 }
 
 main();
