@@ -208,11 +208,18 @@ function main() {
 2112212224221323212122212232121422221211292212942125222122223422322222422223522212222211332222222272
 `;
   print_hello();
-  let answPuzzleExample = lobbyPart1(exampleBanks);
-  console.log(`Result from example data : ${answPuzzleExample}`); //  357
-  lobbyPart2(exampleBanks);
-  let answPuzzleInput = lobbyPart1(inputBanks);
-  console.log(`Result from Input Puzzle data : ${answPuzzleInput}`); //  17085
+  // let answPuzzleExample = lobbyPart1(exampleBanks);
+  // let answPuzzleInput = lobbyPart1(inputBanks);
+
+  // let answPuzzleExample1 = lobbyPart2(exampleBanks, 2);
+
+  // let answPuzzleInput1 = lobbyPart2(inputBanks, 2);
+
+  let answPuzzleExample2 = lobbyPart2(exampleBanks, 12);
+  console.log('### : ', answPuzzleExample2); // 357
+
+  // let answPuzzleInput2 = lobbyPart2(inputBanks, 12);
+  // console.log(`Result from Input Puzzle data : ${answPuzzleInput2}`); //  17085
 }
 
 main();
