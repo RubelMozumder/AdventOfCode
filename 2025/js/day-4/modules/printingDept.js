@@ -17,24 +17,30 @@ class CoordinateSpace {
     let totalPoints = 0;
     const circleToPoints = new Map();
 
+    const pAround = [];
+    const initialPoint = [];
     for (let step = 1; step < 10000000; step++) {
       if (totalPoints >= maxAdjacentPoint) {
-        return circleToPoints;
+        // Sort in ascending order according to key values
+        return new Map(
+          [...circleToPoints.entries()].sort((a, b) => a[0] - b[0])
+        );
       }
-      const pAround = [];
-      const initialPoint = [];
       if (pAround.length === 0) {
         initialPoint.push(Array.from({ length: this.#dim }, (_, i) => args[i]));
+        // console.log('pArround is zero : ', pAround);
       } else {
+        console.log('pArround is not  : ', pAround);
         initialPoint.pop();
       }
       for (let axInd = 0; axInd < this.#dim; axInd++) {
-        const extendPointsAround = [];
-        for (let point of [...pAround, ...initialPoint]) {
+        // const extendPointsAround = [];
+        const basePoints = [...pAround, ...initialPoint];
+        for (let point of basePoints) {
           for (const move of [1, -1]) {
-            const newPoint = Array.from(point);
+            const newPoint = [...point]; //Array.from(point);
 
-            newPoint[axInd] = newPoint.at(axInd) + move * step;
+            newPoint[axInd] += move * step;
             let sum = newPoint.reduce(
               (accumulator, element) => accumulator + element ** 2,
               0
@@ -45,11 +51,10 @@ class CoordinateSpace {
             }
             let arr = circleToPoints.get(norm);
             arr.push(newPoint);
-            extendPointsAround.push(newPoint);
+            pAround.push(newPoint);
             totalPoints += 1;
           }
         }
-        pAround.push(...extendPointsAround);
       }
     }
   }
@@ -115,6 +120,7 @@ export function findRollAround1(diagram, allowedPaperRolls, AdjacentSpots) {
   const coordSpace = new CoordinateSpace(0, col, 0, row);
   // Total points those have maximum or lower number of paper rolls at the adjacent
   let totalAccesiblePoints = 0;
+
   for (let y = 0; y < row; y++) {
     for (let x = 0; x < col; x++) {
       //  Only consider the point where the paper roller is available
@@ -134,13 +140,13 @@ export function findRollAround1(diagram, allowedPaperRolls, AdjacentSpots) {
           break;
         }
         paperRoll += value.reduce((accumulator, point) => {
-          const [x, y] = point;
-          if (x < 0 || y < 0) {
+          const [xp, yp] = point;
+          if (xp < 0 || yp < 0) {
             return accumulator;
-          } else if (x > col - 1 || y > row - 1) {
+          } else if (xp > col - 1 || yp > row - 1) {
             return accumulator;
           }
-          if (diagramArray[y][x] === '@') {
+          if (diagramArray[yp][xp] === '@') {
             return accumulator + 1;
           }
 
@@ -150,6 +156,74 @@ export function findRollAround1(diagram, allowedPaperRolls, AdjacentSpots) {
       }
       if (paperRoll <= allowedPaperRolls) {
         totalAccesiblePoints += 1;
+      }
+    }
+  }
+  return totalAccesiblePoints;
+}
+
+export function findRollAround2(diagram, allowedPaperRolls, AdjacentSpots) {
+  const diagramArray = diagram.split('\n').filter((x) => x !== '');
+  const row = diagramArray.length;
+  for (let i = 0; i < diagramArray.length; i++) {
+    diagramArray[i] = diagramArray[i].split('').filter((x) => x !== '');
+  }
+  // Object.freeze(diagramArray);
+  const col = diagramArray[0].length;
+  const coordSpace = new CoordinateSpace(0, col, 0, row);
+  // Total points those have maximum or lower number of paper rolls at the adjacent
+  let totalAccesiblePoints = 0;
+  let arrMovedPaperRollers = [];
+  let prevTotalAccesiblePoints = -1;
+  while (totalAccesiblePoints != prevTotalAccesiblePoints) {
+    prevTotalAccesiblePoints = totalAccesiblePoints;
+
+    // Take care of removed paper rolls
+    if (arrMovedPaperRollers.length != 0) {
+      for (const remPoint of arrMovedPaperRollers) {
+        let [xInd, yInd] = remPoint;
+        diagramArray[yInd][xInd] = '.';
+      }
+      arrMovedPaperRollers = [];
+    }
+    // Ends part-2
+    for (let y = 0; y < row; y++) {
+      for (let x = 0; x < col; x++) {
+        //  Only consider the point where the paper roller is available
+        if (diagramArray[y][x] === '.') {
+          continue;
+        }
+        let circleToPoints = coordSpace.getAdjacentCircleAndPoints(
+          AdjacentSpots,
+          x,
+          y
+        );
+
+        let checkTotalPoint = 0;
+        let paperRoll = 0;
+        for (const [key, value] of circleToPoints) {
+          if (AdjacentSpots <= checkTotalPoint) {
+            break;
+          }
+          paperRoll += value.reduce((accumulator, point) => {
+            const [xp, yp] = point;
+            if (xp < 0 || yp < 0) {
+              return accumulator;
+            } else if (xp > col - 1 || yp > row - 1) {
+              return accumulator;
+            }
+            if (diagramArray[yp][xp] === '@') {
+              return accumulator + 1;
+            }
+
+            return accumulator;
+          }, 0);
+          checkTotalPoint += value.length;
+        }
+        if (paperRoll <= allowedPaperRolls) {
+          totalAccesiblePoints += 1;
+          arrMovedPaperRollers.push([x, y]);
+        }
       }
     }
   }

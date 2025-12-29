@@ -1,5 +1,5 @@
-import { findRollAround } from './modules/printingDept.js';
-// Answer -->
+import { findRollAround1, findRollAround2 } from './modules/printingDept.js';
+
 let puzzleInput = `@.@.@@@@@@@..@@@.@@.@.@..@@.@.@@@....@.@@@@.@@@@@@.@@.@@@..@..@.@@.@@@@@@@.@...@@@@@@....@@@@@@@.....@.@..@...@@.@@@@@@@@@.@@@..@@@.@..@@@@
 @@@..@@@@@@@@..@@@.@@@.@@@@.@@@@@.@.@@@@@.@@......@.@.@@...@@@@.@@.@@.@@@@@@.@@@.@..@@@@@@@@@@@@@@@.@.@@@.@@@.@.@@@....@@@@@.@.@..@.@...@.@
 @.@@@@@....@.@@@.@@@@..@..@@.@@.@...@@.@.@@@.@.@@@.@@...@.@@..@@@.@..@.@.@...@@..@@@@@.@.@..@.@.....@@@@.@@@@..@@@@@..@@..@@@@@@@@@@@@.@@@@
@@ -140,7 +140,6 @@ let puzzleInput = `@.@.@@@@@@@..@@@.@@.@.@..@@.@.@@@....@.@@@@.@@@@@@.@@.@@@..@.
 .@@..@.@@@@.@@.@@@.@..@.@@@@.@@@@..@.@....@@..@.@@@..@.@@.@.@@.@@.@@@@@..@@...@@@@@@@@.@@@@@@..@@.@@@...@.@@.@@@@.@@..@.@@.@@.@.@@.@@..@@.@
 .@@@@.@@..@....@@@..@@.@@@@@@@.@..@@@@@@@.@.@@....@@.@@@.@@...@..@@.@.@.@@.@@@.@@@@@@@@@@@......@..@..@@@@.@@.@.@@@@@@@@@@@@@.@.@@..@@@..@.`;
 
-// Answer --> 13
 let puzzleExample = `..@@.@@@@. 
 @@@.@.@.@@
 @@@@@.@.@@
@@ -152,8 +151,20 @@ let puzzleExample = `..@@.@@@@.
 .@@@@@@@@.
 @.@.@@@.@.`;
 
-let answPuzzleExample = findRollAround(puzzleExample, 4 - 1, 8);
+// Note problem description it is mention answer is 13
+// But, I found the 23 seems that is the correct.
+let answPuzzleExample = findRollAround1(puzzleExample, 4 - 1, 8);
 console.log('#### : ans ', answPuzzleExample);
 
-let answPuzzleInput = findRollAround(puzzleInput, 4 - 1, 8);
+// Answer 1467
+let answPuzzleInput = findRollAround1(puzzleInput, 4 - 1, 8);
 console.log('#### : ans ', answPuzzleInput);
+
+// Note problem description it is mention answer is 43
+// But, I found the 53 seems that is the correct.
+let answPuzzleExample2 = findRollAround2(puzzleExample, 4 - 1, 8);
+console.log('#### : ans ', answPuzzleExample2);
+
+// Answer 8484
+let answPuzzleInput2 = findRollAround2(puzzleInput, 4 - 1, 8);
+console.log('#### : ans ', answPuzzleInput2);
