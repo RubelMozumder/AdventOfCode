@@ -1,4 +1,8 @@
-import { listOfValidIds } from './modules/cafeteria.js';
+import {
+  getRangesAndIds,
+  allNumberOfValidIds,
+  listOfValidIds,
+} from './modules/cafeteria.js';
 
 const exampleInput = `3-5
 10-14
@@ -1190,8 +1194,16 @@ const puzzleInput = `90876390158586-99371575473204
 30160770257295
 217217099357482`;
 
-const validIds = listOfValidIds(exampleInput);
-console.log(`Valid ids : ${validIds.length}`);
+let [mergedSortedList, idsToCheck] = getRangesAndIds(exampleInput);
 
-const validIdsInputPuzzle = listOfValidIds(puzzleInput);
+const validIds = listOfValidIds(idsToCheck, mergedSortedList);
+console.log(`Valid ids : ${validIds}`);
+let allAllowedValidIds = allNumberOfValidIds(mergedSortedList);
+console.log(`All allowed valid ids : ${allAllowedValidIds}`);
+
+[mergedSortedList, idsToCheck] = getRangesAndIds(puzzleInput);
+const validIdsInputPuzzle = listOfValidIds(idsToCheck, mergedSortedList);
 console.log(`Valid ids : ${validIdsInputPuzzle.length}`);
+
+allAllowedValidIds = allNumberOfValidIds(mergedSortedList);
+console.log(`All allowed valid ids : ${allAllowedValidIds}`);

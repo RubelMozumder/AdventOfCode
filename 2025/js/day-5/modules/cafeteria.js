@@ -1,4 +1,16 @@
-export function listOfValidIds(inputText) {
+export function allNumberOfValidIds(sortedRangeList) {
+  let count = 0;
+  for (let [l, r] of sortedRangeList) {
+    count += r - l + 1;
+  }
+  return count;
+}
+
+export function listOfValidIds(idsToCheck, sortedRangeList) {
+  return idsToCheck.filter(isIdInRanges, { sortedRangeList });
+}
+
+export function getRangesAndIds(inputText) {
   const lines = inputText.split('\n').filter((x) => x);
   const sortedRangeList = [];
   const ids = [];
@@ -8,10 +20,10 @@ export function listOfValidIds(inputText) {
     if (i.includes('-')) {
       let range = i
         .split('-')
-        .map((x) => x.trim())
+        .map((x) => parseInt(x.trim()))
         .filter((x) => x);
-      console.log(`range ${range instanceof Array}`);
-      sortedRangeList.push(range.map((x) => x * 1));
+      // console.log(`range ${range instanceof Array}`);
+      sortedRangeList.push(range);
     } else {
       ids.push(i * 1);
     }
@@ -22,10 +34,11 @@ export function listOfValidIds(inputText) {
   for (let rng of sortedRangeList) {
     mergeRanges(mergedSortedRanges, rng);
   }
-
-  const rangeAndids = { sortedRangeList };
-  return ids.filter(isIdInRanges, rangeAndids);
+  return [mergedSortedRanges, ids];
 }
+// const rangeAndids = { sortedRangeList };
+// return ids.filter(isIdInRanges, rangeAndids);
+// }
 
 function mergeRanges(sortedRangeList, range) {
   let [lCur, rCur] = range;
