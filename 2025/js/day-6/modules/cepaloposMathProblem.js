@@ -4,7 +4,6 @@ export function arrayOfInnerReducedArr(input_text) {
     .pop()
     .split(' ')
     .filter((elm) => elm.trim());
-
   const strToOpt = {};
   const strToStartingValue = {};
   mathSymbols.forEach((symbol) => {
@@ -21,10 +20,14 @@ export function arrayOfInnerReducedArr(input_text) {
     twoDArray[ind] = line.split(' ').filter((elm) => elm.trim());
   });
 
-  return twoDArray.map((inner_array, ind) => {
-    const symbol = mathSymbols[ind];
-    inner_array.reduce(strToOpt[symbol], strToStartingValue[symbol]);
+  const sumInnerArr = mathSymbols.map((symbol) => strToStartingValue[symbol]);
+  twoDArray.forEach((inner_array, out_ind) => {
+    inner_array.forEach((elm, ind) => {
+      const symbol = mathSymbols[ind];
+      sumInnerArr[ind] = strToOpt[symbol](sumInnerArr[ind], elm * 1);
+    });
   });
+  return sumInnerArr;
 }
 
 export function sumOfInnerResult(arrayOfInnerReducedResult) {
