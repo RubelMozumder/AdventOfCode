@@ -21,5 +21,5 @@ const mathSheetPuzzle = `155  1 62 1925 984 83  723 832 57   1 134 44 6    55   
 `;
 
 const sumOfInnerArrayPuzzle = arrayOfInnerReducedArr(mathSheetPuzzle);
-
+// Part-1 Ans: 5552221122013
 console.log(' Total sum ', sumOfInnerResult(sumOfInnerArrayPuzzle));

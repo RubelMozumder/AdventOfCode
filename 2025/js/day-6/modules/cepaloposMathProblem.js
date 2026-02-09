@@ -1,9 +1,14 @@
+function getTwoDArray(input_text) {
+  const twoDArray = input_text
+    .split('\n')
+    .filter((line) => line.trim())
+    .map((elm) => elm.split(' ').filter((x) => x.trim()));
+  return twoDArray;
+}
+
 export function arrayOfInnerReducedArr(input_text) {
-  const twoDArray = input_text.split('\n').filter((line) => line.trim());
-  const mathSymbols = twoDArray
-    .pop()
-    .split(' ')
-    .filter((elm) => elm.trim());
+  const twoDArray = getTwoDArray(input_text);
+  const mathSymbols = twoDArray.pop();
   const strToOpt = {};
   const strToStartingValue = {};
   mathSymbols.forEach((symbol) => {
@@ -14,10 +19,6 @@ export function arrayOfInnerReducedArr(input_text) {
       strToOpt[symbol] = (a, b) => a * b;
       strToStartingValue[symbol] = 1;
     }
-  });
-
-  twoDArray.forEach((line, ind) => {
-    twoDArray[ind] = line.split(' ').filter((elm) => elm.trim());
   });
 
   const sumInnerArr = mathSymbols.map((symbol) => strToStartingValue[symbol]);
