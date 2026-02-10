@@ -1,6 +1,7 @@
 import {
   sumOfInnerResult,
-  arrayOfInnerReducedArr,
+  arrayOfInnerReducedArrPart1,
+  arrayOfInnerReducedArrPart2,
 } from './modules/cepaloposMathProblem.js';
 
 const mathSheetExample = `123 328  51 64 
@@ -9,7 +10,7 @@ const mathSheetExample = `123 328  51 64
 *   +   *   + 
 `;
 
-const sumOfInnerArray = arrayOfInnerReducedArr(mathSheetExample);
+const sumOfInnerArray = arrayOfInnerReducedArrPart1(mathSheetExample);
 
 console.log(' Total sum ', sumOfInnerResult(sumOfInnerArray));
 
@@ -20,6 +21,15 @@ const mathSheetPuzzle = `155  1 62 1925 984 83  723 832 57   1 134 44 6    55   
 *   *  *  +    *   *   *   *   +   +  +   +  +    *   +   *  +  +    *  *   *  *   +   *  +   +   +   +   *  *   +   +    +  *  +    +   +    +  +    *  *   +  +    *   +   +    *  *  +  *   +   +  +  *   *   *   +   *  *  *  +    *   *   *  +   *   +   +    *   *  +  +  *  +  +   +    *   +  +    +    *   *   *   *   *   +   *   +  *   +  +  *  *   *  *  +  *  *  +   +    +  *   *   +   *  *   *   *  +    +  *   *  *  *  +  *   +  +  +    *   +  *   +   *  *  +    *   *  *  +   +   +    +    +   +    *   *  *   *  *  *  +  *  *   *   +    +   *  +   +    +    +  +    *  +    *  +   +    *  +  +   *  +   *  +   *  +   *  +   +    *  +    +   *  +   *   *  *   +  +   *  *  +    +   *  +  *  *  *   *  +   +  +   +    +  +  *   *   *   *   +  +  +    *   *  +   *   *  *  +  +  *  +    *   *  *   *   *   +   +    +  +    *  +  *   *   *   +   +  *  *  *  *  *  +    *  +   *  *   *  +  +    *   +  +   +    +  *   +   *  +  +  +  *  *   *  *   *  +  +   *   *   *   +   +   +    +    +    +   *  +   +  *   *   +    *  *  *  *  +  +  +   *  +    +  *  +   *  *  *  *   *   +    +    +  *   +  *  +  *   +  *  *  +    +    *  *   +    *  *  +  +  *   *   *   *   +    +  *  *   +  *   +    +  +    +  *   *   *  +   *   *  +    +    +   *  +    *  +    *  *  +    *   *   *   +  *   *   +   *   +  +    *  *   *   +  +  *   *  *  *   +    +  +    +   *  +  *  *  +  +  +    *   *   *  *  *   +    *   *   *  *  *  *  +    +    *   +  +    +   *   *  *   +  +   +    +   *  +  +  +    *   +   *  +    *  +  +   *   *  *   *   +  +    +    +   +   *  *  +    +    *  +    +    *   *  *  +  *   +   *   *  +  +   +    *   *   +   *   +  +   +    +  *  +  +  +   *   +    +    +    *  *  *  *   *  *  *  +   +   *  +  *   +  *   +   +   +  *  +    +   *   +  *   *   +   *   *   *   *   +  *   *   +  *   *   +    *   +   +   +  *   *  +  +   +    *   +    +  *   *  *  +   *  +    *  +   *  +  +   +    *   *   *   *   +   +    +    +   *   +   *  *   +   *  +   *  +   *   *  +   *  *   *   *   +    *  +    *   +   *   +  *  +    +    +    *   *   +   *  +    +   +    +    *  *   *   +   *  *  +   *   *   *   +    *   +   +  +    *   *  +    *   *   *   +   +   +    +    +  +   +    +   *  +  +   *  *  +    +   +    +    *   *   *  +  *  *   *   *   +   +   *  +    *   +   *  *  +    *   +    +    +   +   +  +  *  *   +   +    +  +   *   +  +    +   +  +   +   +  *   *   +   +    *   +  *  *   *   *   *  *  *   +    +   *   *  *   +  *   +   *   +    *   *  +    *  *   *  +  +  +  +   +   +   +  +  *  +  +   +  +    *   *   +    +  +  *  +  *  +    +   +   +    *  +   *  *   *  +    *   +    *  +   *   +   *  +  +  +  *  *   *  +  +  +  +   +   *   *  *  *   +    *  +   +   +  +    *   +  *   *  +    +   +   +   +    +    +  +   *  +   +   *   +    +    *   +    +   +   *   *   +    +   *   +  +    +   *   +  *  +   *  +  +  +  *   *  *   +  *  *  *  *   *  +  *  *   +    *  *  +   *   +  +    +  +    +   *   *  +  +   *  +    *  *   *  *  +   +  +    +   *   *   *  *   *   *   +    *   *   +  +   *  +    *   +   *   *  *  +   +    *  +   *   +    +    +    *   *   *  *  *  *   *  +   +    +  +    *   *   *   *   *   *   *  *   *  *   +  +   *  +  +  +    +    +   *   *   *  *   +  +  +    *  *   *   *  *  +  *  *  *   *  +  +   +    +    *   +    +    *   *  +    +   *   *  *   *  *  +   *   *   *  *  *  +    +   *   +    +    *   *  +    *  +   +    +    *   *  +  *   +   *  *  +    *  +   +   +   *  +  +  +   +    *   +    +  *  *  *  +   *   +   *  *  *  *   *  +  +  +   *  *  +    +    *   +  +   *  *   *  +    *  +  *   +    +    *   *   *  +  +    +    *  *   +  *  *   +  *  *  *  *   *   *   *   *   +   +  *   +  *   +   +  *  +  *  +  *   *  +  *  +  *  *  +  *   +    +    +  +  +    *   *   *  *   *  *   *  
 `;
 
-const sumOfInnerArrayPuzzle = arrayOfInnerReducedArr(mathSheetPuzzle);
+const sumOfInnerArrayPuzzle = arrayOfInnerReducedArrPart1(mathSheetPuzzle);
 // Part-1 Ans: 5552221122013
+
 console.log(' Total sum ', sumOfInnerResult(sumOfInnerArrayPuzzle));
+
+const sumOfInnerArray2 = arrayOfInnerReducedArrPart2(mathSheetExample);
+
+console.log(' Total sum ', sumOfInnerResult(sumOfInnerArray2));
+
+const sumOfInnerArrayPuzzle2 = arrayOfInnerReducedArrPart2(mathSheetPuzzle);
+// Part-1 Ans: 5552221122013
+console.log(' Total sum ', sumOfInnerResult(sumOfInnerArrayPuzzle2));
