@@ -43,35 +43,22 @@ export function arrayOfInnerReducedArrPart2(input_text) {
     let col_i = 0;
 
     let number = '';
+    let skip_inter_col_sp = false;
     for (let char_i = 0; char_i < line.length; char_i++) {
+      if (skip_inter_col_sp) {
+        skip_inter_col_sp = false;
+        continue;
+      }
       number += line.at(char_i);
       if (numberIndices[col_i] == char_i) {
         twoDArray[col_i].push(number);
         number = '';
         col_i++;
+        skip_inter_col_sp = true;
       }
-
-      // console.log('twoDArray : ', twoDArray);
-      // if (char_i == line.length - 1) {
-      // number += char;
-      // twoDArray[char_i].push(number);
-      // continue;
-      // }
-      // if (pre_char !== ' ' && char == ' ') {
-      // const col_arr = twoDArray[col_i];
-      // console.log(' col_arr : ', col_i);
-      // twoDArray[col_i].push(number);
-      // number = '';
-      // col_i++;
-      // pre_char = char;
-      // } else {
-      // number += char;
-      // pre_char = char;
-      // }
-      // char_i++;
     }
   }
-  console.log(' Two-D array : ', twoDArray);
+
   twoDArray.forEach((col, ind, twoDArray) => {
     twoDArray[ind] = col.map((elm) => elm.split(''));
   });
@@ -79,22 +66,20 @@ export function arrayOfInnerReducedArrPart2(input_text) {
   const reducedTwoArray = Array(twoDArray.length);
   for (let col_ind = 0; col_ind < twoDArray.length; col_ind++) {
     const col = twoDArray[col_ind];
-    const sumInnerElm = [];
+    const sumInnerElm = Array(col.at(0).length).fill(0);
     for (let row_ind = 0; row_ind < col.length; row_ind++) {
       col[row_ind].forEach((end_elm, ind) => {
-        sumInnerElm[ind] += end_elm;
+        sumInnerElm[ind] += end_elm.trim();
       });
     }
-    console.log(sumInnerElm);
-    reducedTwoArray[col_ind] = sumInnerElm;
+    reducedTwoArray[col_ind] = sumInnerElm.map((x) => x * 1);
   }
-
   reducedTwoArray.forEach((col, ind) => {
-    reducedTwoArray[ind] = col
-      .map((x) => x.trim() * 1)
-      .reduce(strToOpt[mathSymbols[ind]], strToStartingValue[mathSymbols[ind]]);
+    reducedTwoArray[ind] = col.reduce(
+      strToOpt[mathSymbols[ind]],
+      strToStartingValue[mathSymbols[ind]],
+    );
   });
-  // .map((elm) => elm.split(' ').filter((x) => x.trim()));
   return reducedTwoArray;
 }
 
